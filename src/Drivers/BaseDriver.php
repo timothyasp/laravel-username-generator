@@ -259,7 +259,7 @@ abstract class BaseDriver
             }
 
             if (($similar = count($this->model()->findSimilarUsernames($text))) > 0) {
-                return $text.$this->getConfig('separator').($similar++);
+                return $this->makeUnique($text.$this->getConfig('separator').($similar++));
             }
         }
 
