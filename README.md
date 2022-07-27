@@ -1,48 +1,42 @@
 # Laravel Username Generator
 
-![Stable](https://poser.pugx.org/taylornetwork/laravel-username-generator/v/stable)
-![Downloads](https://poser.pugx.org/taylornetwork/laravel-username-generator/downloads)
-![License](https://poser.pugx.org/taylornetwork/laravel-username-generator/license)
-![Tests](https://github.com/taylornetwork/laravel-username-generator/workflows/Tests/badge.svg)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/taylornetwork/laravel-username-generator?label=release&color=blueviolet&style=flat-square)
+![Packagist Downloads](https://img.shields.io/packagist/dt/taylornetwork/laravel-username-generator?style=flat-square&color=blue)
+![GitHub](https://img.shields.io/github/license/taylornetwork/laravel-username-generator?color=orange&logo=github&style=flat-square)
+![GitHub branch checks state](https://img.shields.io/github/checks-status/taylornetwork/laravel-username-generator/master?label=tests&logo=github&style=flat-square)
 ![StyleCI](https://github.styleci.io/repos/104370109/shield?branch=master)
+![Scrutinizer code quality (GitHub/Bitbucket)](https://img.shields.io/scrutinizer/quality/g/taylornetwork/laravel-username-generator/master?style=flat-square)
 
 Easily generate unique usernames for a Laravel User Model.
 
 Works for Laravel versions above 5.5 including Laravel 9.
 
-1. [Most Recent Update](#most-recent-update)
+1. [Change Log](#change-log)
 2. [Install](#install)
 3. [Set Up](#set-up)
 4. [Config](#config)
-      - [Allowed Characters](#allowed-characters)
+   - [Allowed Characters](#allowed-characters)
 5. [Basic Usage](#basic-usage)
-    - [generate($name)](#generatename)
-    - [generateFor($model)](#generateformodel)
-    - [GeneratesUsernames Trait](#generatesusernames-trait)
-    - [UsernameGenerator Facade](#usernamegenerator-facade)
+   - [generate($name)](#generatename)
+   - [generateFor($model)](#generateformodel)
+   - [GeneratesUsernames Trait](#generatesusernames-trait)
+   - [UsernameGenerator Facade](#usernamegenerator-facade)
 6. [Other Examples](#other-examples)
-    - [With a Separator](#with-a-separator)
-    - [Upper Case](#upper-case)
-    - [Additional Casing Options](#additional-casing-options)
-    - [Mixed Case](#mixed-case)
-    - [Minimum Length](#minimum-length)
-    - [Maximum Length](#maximum-length)
-    - [Other Character Sets](#other-character-sets)
+   - [With a Separator](#with-a-separator)
+   - [Upper Case](#upper-case)
+   - [Additional Casing Options](#additional-casing-options)
+   - [Mixed Case](#mixed-case)
+   - [Minimum Length](#minimum-length)
+   - [Maximum Length](#maximum-length)
+   - [Other Character Sets](#other-character-sets)
 7. [Drivers](#drivers)
-    - [Extending](#extending)
+   - [Extending](#extending)
 8. [License](#license)
-9. [Change Log](#change-log)
 
 
-## Most Recent Update
+## Change Log
 
-**v2.6.1**
-
-- Added support for PHP 8.1
-- Set minimum PHP version to 7.4
-
-*Updated January 2, 2022*
-
+See the [Change Log](https://github.com/taylornetwork/laravel-username-generator/blob/master/CHANGELOG.md)
 
 
 ## Install
@@ -62,7 +56,7 @@ This will add the config to `config/username_generator.php`
 $ php artisan vendor:publish --provider="TaylorNetwork\UsernameGenerator\ServiceProvider"
 ```
 
-## Quickstart 
+## Quickstart
 
 This section will help you get up and running fast.
 
@@ -70,7 +64,7 @@ The following steps will be the same for all Laravel versions and assumes you're
 
 **User Model**
 
-In `App\Models\User` (or `App\User` for Laravel 7) add the `FindSimilarUsernames` and `GeneratesUsernames` traits. 
+In `App\Models\User` (or `App\User` for Laravel 7) add the `FindSimilarUsernames` and `GeneratesUsernames` traits.
 Add `'username'` to the fillable property.
 
 ```php
@@ -162,7 +156,7 @@ public function username()
 
 ## Set Up
 
-Add the `FindSimilarUsernames` trait on your user model (or whichever model you want to use). 
+Add the `FindSimilarUsernames` trait on your user model (or whichever model you want to use).
 
 ```php
 use TaylorNetwork\UsernameGenerator\FindSimilarUsernames;
@@ -212,8 +206,8 @@ For example
    'allowed_characters' => '\p{Cyrillic}\p{Greek}\p{Latin}\s ' // Includes cyrillic, greek and latin sets and all spaces
 ```
 
-Please note that all characters not included in this list are removed before performing any operations. 
-If you get an empty string returned double check that the characters used are included. 
+Please note that all characters not included in this list are removed before performing any operations.
+If you get an empty string returned double check that the characters used are included.
 
 ## Basic Usage
 
@@ -317,7 +311,7 @@ class User
 
 ```
 
-If you need to modify the data before handing it off to the generator, override the `getField` method on your model. 
+If you need to modify the data before handing it off to the generator, override the `getField` method on your model.
 For example if you have a first and last name rather than a single name field, you'll need to add this to your model.
 
 ```php
@@ -358,7 +352,7 @@ $generator->generate('Some User');
 
 ```
 
-Returns 
+Returns
 
 ```
 some_user
@@ -372,7 +366,7 @@ $generator->generate('Some User');
 
 ```
 
-Returns 
+Returns
 
 ```
 SOMEUSER
@@ -389,7 +383,7 @@ UsernameGenerator::setConfig([ 'case' => 'studly' ])->generate('test user');
 // Returns 'TestUser'
 ```
 
-When using studly case the laravel helper will remove the spaces between separate words so if a separator is used it will be overridden. 
+When using studly case the laravel helper will remove the spaces between separate words so if a separator is used it will be overridden.
 You would need to use title case (seen below) in order to have the same effect.
 
 ```php
@@ -425,7 +419,7 @@ $generator->generate('Some User');
 
 ```
 
-Returns 
+Returns
 
 ```
 SomeUser
@@ -441,7 +435,7 @@ $generator->generate('SoMe WeIrD CapitaliZation');
 
 ```
 
-Returns 
+Returns
 
 ```
 SoMeWeIrDCapitaliZation
@@ -451,7 +445,7 @@ SoMeWeIrDCapitaliZation
 
 ### Minimum Length
 
-If you want to enforce a minimum length for usernames generated change the `min_length` option in `config/username_generator.php` 
+If you want to enforce a minimum length for usernames generated change the `min_length` option in `config/username_generator.php`
 
 ```php
 'min_length' => 6,
@@ -487,13 +481,13 @@ Would throw a `UsernameTooShortException`
 
 ### Maximum Length
 
-If you want to enforce a maximum length for usernames generated change the `max_length` option in `config/username_generator.php` 
+If you want to enforce a maximum length for usernames generated change the `max_length` option in `config/username_generator.php`
 
 ```php
 'max_length' => 6,
 ```
 
-By default if the generator generates a username more than the maximum length it will cut it to the max length value and then try to make it unique again. 
+By default if the generator generates a username more than the maximum length it will cut it to the max length value and then try to make it unique again.
 If that becomes too long it will remove one character at a time until a unique username with the correct length has been generated.
 
 For example
@@ -583,7 +577,7 @@ Drivers will perform the following operations in order:
 ]
 ``` 
 
-In your custom driver you can add a method to perform an operation before or after any of the above operations. 
+In your custom driver you can add a method to perform an operation before or after any of the above operations.
 
 ```php
 public function beforeConvertCase(string $text): string 
@@ -646,67 +640,4 @@ And then in `config/username_generator.php` add the driver to the top of the dri
 
 ## License
 
-MIT
-
-## Change Log
-
-**v2.6.1**
-
-- Added support for PHP 8.1
-- Set minimum PHP version to 7.4
-
-**v2.6**
-
-- Added first and last hook for custom drivers
-- Moved the EmailDriver hook to first 
-- Convert case now happens second rather than first 
-- Generator now supports multibyte characters (Cyrillic, etc.)
-- Text will automatically be converted to ASCII by default
-- Added options for converting to ascii and validating the input string
-
-**v2.5.1**
-
-- Fixes issue where custom dictionary nouns and adjectives were not being used
-
-**v2.5**
-
-- Added maximum length check.
-- Added ability for pre-filled usernames to go through generate process to allow for consistent username styles.
-- Added checking for similar usernames using REGEXP or LIKE (LIKE is a fallback if REGEXP fails).
-- Added a check if a username is unique as is before checking for similar ones.
-- Updated `composer.json` to support PHP 7.2 and above
-- Updated readme for better Laravel 8+ quickstart
-
-**v2.4**
-
-- This is a minor change but if you're using older versions of Laravel you may need to update your config file.
-- Changed default User model from `App\User` to `App\Models\User` to mirror new Laravel versions (8.0+).
-- Moved the adjective and noun word lists from the config file to a separate file, making the published config smaller and allowing you to create your own word lists if you wish.
-
-**v2.3**
-
-- Added support for random dictionary based usernames if a name is not provided. See the [generate](#generatename) method
-
-**v2.2.2**
-
-- Fixed bug where if a custom column name was used and set using `generatorConfig` it was not being passed through.
-- Fixed support for overriding the `getName` method from `GeneratesUsernames`
-
-**v2.2**
-
-- Added support for minimum length
-
-**v2.1**
-
-- Switched to a driver based conversion
-- Added email support
-
-*Note: Nothing should break with this update but let me know if you have any issues.*
-
-**v2.0**
-
-- Removed support for deprecated `makeUsername` method
-- `Generator` will now only accept an array of config as the optional constructing arguments
-- Added `UsernameGenerator` facade
-
-
+See the [License](https://github.com/taylornetwork/laravel-username-generator/blob/master/LICENSE)
